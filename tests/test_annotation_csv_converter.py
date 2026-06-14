@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from annotation_csv_converter import convert, parse_cvat_xml
+from annotation_csv_converter import convert, parse_annotation_xml
 
 
 SAMPLE_XML = Path("examples/sample_annotations.xml")
@@ -11,7 +11,7 @@ SAMPLE_XML = Path("examples/sample_annotations.xml")
 
 class AnnotationCsvConverterTests(unittest.TestCase):
     def test_parse_sample_xml(self) -> None:
-        images, boxes = parse_cvat_xml(SAMPLE_XML)
+        images, boxes = parse_annotation_xml(SAMPLE_XML)
 
         self.assertEqual(len(images), 1)
         self.assertEqual(len(boxes), 3)
