@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<annotations>
+  <version>1.1</version>
+  <meta>
+    <job>
+      <id>1000</id>
+      <size>1</size>
+      <mode>annotation</mode>
+      <overlap>0</overlap>
+      <bugtracker></bugtracker>
+      <created>2026-01-01 00:00:00+00:00</created>
+      <updated>2026-01-01 00:00:00+00:00</updated>
+      <subset>default</subset>
+      <start_frame>0</start_frame>
+      <stop_frame>0</stop_frame>
+      <frame_filter></frame_filter>
+      <segments>
+        <segment>
+          <id>1000</id>
+          <start>0</start>
+          <stop>0</stop>
+          <url></url>
+        </segment>
+      </segments>
+      <owner>
+        <username>example_user</username>
+        <email></email>
+      </owner>
+      <assignee></assignee>
+      <labels>
+        <label>
+          <name>OBJECT</name>
+          <color>#24b353</color>
+          <type>any</type>
+          <attributes>
+            <attribute>
+              <name>confidence</name>
+              <mutable>True</mutable>
+              <input_type>radio</input_type>
+              <default_value>Low</default_value>
+              <values>Low
+Medium
+High</values>
+            </attribute>
+            <attribute>
+              <name>category</name>
+              <mutable>True</mutable>
+              <input_type>radio</input_type>
+              <default_value>type_a</default_value>
+              <values>type_a
+type_b
+type_c</values>
+            </attribute>
+            <attribute>
+              <name>status</name>
+              <mutable>True</mutable>
+              <input_type>radio</input_type>
+              <default_value>review</default_value>
+              <values>review
+accepted
+rejected</values>
+            </attribute>
+            <attribute>
+              <name>notes</name>
+              <mutable>True</mutable>
+              <input_type>text</input_type>
+              <default_value></default_value>
+              <values></values>
+            </attribute>
+          </attributes>
+        </label>
+      </labels>
+    </job>
+    <dumped>2026-01-01 00:00:00+00:00</dumped>
+  </meta>
+  <image id="0" name="sample_image_001.jpg" width="1130" height="1290">
+    <box label="OBJECT" source="manual" occluded="0" xtl="727.82" ytl="417.81" xbr="791.30" ybr="481.29" z_order="0">
+      <attribute name="confidence">High</attribute>
+      <attribute name="category">type_a</attribute>
+      <attribute name="status">accepted</attribute>
+      <attribute name="notes">Example annotation.</attribute>
+    </box>
+    <box label="OBJECT" source="manual" occluded="0" xtl="334.68" ytl="628.71" xbr="404.30" ybr="700.38" z_order="0">
+      <attribute name="confidence">Low</attribute>
+      <attribute name="category">type_b</attribute>
+      <attribute name="status">review</attribute>
+      <attribute name="notes">Needs review.</attribute>
+    </box>
+    <box label="OBJECT" source="manual" occluded="0" xtl="299.87" ytl="362.52" xbr="418.63" ybr="450.57" z_order="0">
+      <attribute name="confidence">Medium</attribute>
+      <attribute name="category">type_c</attribute>
+      <attribute name="status">accepted</attribute>
+      <attribute name="notes">Synthetic example.</attribute>
+    </box>
+  </image>
+</annotations>
