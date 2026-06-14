@@ -1,11 +1,13 @@
 # Generic Annotation CSV Converter
 
-Convert a CVAT XML annotation export into two general-purpose CSV files:
+Convert XML image annotations into two general-purpose CSV files:
 
 - `images.csv`: one row per image
 - `boxes.csv`: one row per bounding box
 
-The converter uses only the Python standard library. No third-party packages are required.
+The converter is designed for annotation XML files that contain images, bounding
+boxes, labels, and optional attributes. It uses only the Python standard library,
+so no third-party packages are required.
 
 ## Quick Start
 
@@ -15,11 +17,14 @@ python3 annotation_csv_converter.py
 
 By default, this reads `examples/sample_annotations.xml` and writes CSV files to `output/`.
 
-To convert your own CVAT XML export:
+To convert your own annotation XML file:
 
 ```bash
 python3 annotation_csv_converter.py path/to/annotations.xml --out output
 ```
+
+The input XML should use an `annotations` root with `image` entries and optional
+`box`, `tag`, and `attribute` elements.
 
 ## CSV Schema
 
