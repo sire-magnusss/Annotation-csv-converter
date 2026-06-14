@@ -1,35 +1,4 @@
 #!/usr/bin/env python3
-"""
-Generic CVAT CSV Converter
-==========================
-
-Convert a CVAT XML export into two general-purpose CSV files:
-
-1. images.csv
-   - one row per image
-
-2. boxes.csv
-   - one row per bounding box
-
-Usage:
-    python annotation_csv_converter.py
-    python annotation_csv_converter.py annotations.xml --out output
-
-Expected folder layout:
-    generic_annotation_converter/
-    |-- annotations.xml
-    `-- annotation_csv_converter.py
-
-Output:
-    output/
-    |-- images.csv
-    `-- boxes.csv
-
-Notes:
-    - Uses Python standard library only.
-    - Parses XML with xml.etree.ElementTree.
-    - Attribute columns are inferred from the XML and prefixed with attr_.
-"""
 
 import argparse
 import csv
@@ -95,7 +64,7 @@ def derive_item_id(image_name: str) -> str:
 
 
 def parse_float(value: str | None) -> float:
-    """Parse a CVAT coordinate value, defaulting missing values to 0.0."""
+    """Parse a coordinate value, defaulting missing values to 0.0."""
     value = normalise_text(value)
     if not value:
         return 0.0
@@ -103,12 +72,7 @@ def parse_float(value: str | None) -> float:
 
 
 def extract_attributes(element: ET.Element) -> dict[str, str]:
-    """
-    Extract CVAT child attributes from an XML element.
-
-    CVAT stores attributes as:
-        <attribute name="quality">high</attribute>
-    """
+    """Extract child attributes from an XML element."""
     attributes = {}
 
     for attr in element.findall("attribute"):
@@ -132,14 +96,14 @@ def extract_image_attributes(image_element: ET.Element) -> dict[str, str]:
     return attributes
 
 
-def parse_cvat_xml(
+def parse_annotation_xml(
     xml_path: Path,
 ) -> tuple[list[Row], list[Row]]:
-    """Parse a CVAT XML export into image rows and box rows."""
+    """Parse annotation XML into image rows and box rows."""
     tree = ET.parse(xml_path)
     root = tree.getroot()
     if root.tag != "annotations":
-        raise ValueError(f"Expected CVAT root element 'annotations', found '{root.tag}'.")
+        raise ValueError(f"Expected root element 'annotations', found '{root.tag}'.")
 
     images = []
     boxes = []
@@ -208,10 +172,10 @@ def write_csv(path: Path, rows: list[Row], columns: list[str]) -> None:
 
 
 def convert(xml_path: Path, output_dir: Path) -> tuple[Path, Path, int, int]:
-    """Convert CVAT XML into images and boxes CSV files."""
+    """Convert annotation XML into images and boxes CSV files."""
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    images, boxes = parse_cvat_xml(xml_path)
+    images, boxes = parse_annotation_xml(xml_path)
 
     images_csv_path = output_dir / "images.csv"
     boxes_csv_path = output_dir / "boxes.csv"
@@ -224,14 +188,14 @@ def convert(xml_path: Path, output_dir: Path) -> tuple[Path, Path, int, int]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Convert CVAT annotations.xml to images.csv and boxes.csv."
+        description="Convert annotation XML to images.csv and boxes.csv."
     )
     parser.add_argument(
         "xml_path",
         nargs="?",
         type=Path,
         default=DEFAULT_XML_PATH,
-        help=f"Path to CVAT annotations.xml file. Default: {DEFAULT_XML_PATH}",
+        help=f"Path to annotation XML file. Default: {DEFAULT_XML_PATH}",
     )
     parser.add_argument(
         "--out",
